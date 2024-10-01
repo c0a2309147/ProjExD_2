@@ -92,6 +92,11 @@ def main():
         if bb_rct.top < 0 or bb_rct.bottom > HEIGHT:
             vy = -vy  # 縦方向の速度を反転
 
+        # 衝突判定
+        if kk_rct.colliderect(bb_rct):
+            print("衝突！")  # 衝突した場合のメッセージ
+            return  # メイン関数を終了
+
 
         # 爆弾を画面に描画
         screen.blit(bb_img, bb_rct)
