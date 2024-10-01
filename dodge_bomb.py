@@ -153,6 +153,7 @@ def main():
             if event.type == pg.QUIT:
                 return  
 
+        print("Pythonなんて大っ嫌い二度と見なくない\n")
         screen.blit(bg_img, [0, 0])
 
         # キーの押下状態を取得
