@@ -147,13 +147,20 @@ def main():
 
     tmr = 0  # タイマー
 
+    frame_count = 0
+    frame_limit = 100  # 100フレームごとに出力
+
     while True:
         # イベント処理
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return  
 
-        print("Pythonなんて大っ嫌い二度と見なくない\n")
+        frame_count += 1
+        # 出力回数を制限
+        if frame_count % frame_limit == 0:
+            print("Pythonなんて大っ嫌い二度と見なくない\n")
+            
         screen.blit(bg_img, [0, 0])
 
         # キーの押下状態を取得
