@@ -116,6 +116,11 @@ def main():
         
         tmr += 1  # タイマー更新
 
+        # 衝突判定
+        if kk_rct.colliderect(bb_rct):
+            print("衝突！")  # 衝突した場合のメッセージ
+            return  # メイン関数を終了
+
 if __name__ == "__main__":
     pg.init()  # Pygameの初期化
     main()  # メイン関数を実行
