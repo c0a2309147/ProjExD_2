@@ -2,6 +2,7 @@ import os
 import sys
 import pygame as pg
 import random
+import time
 
 # ウィンドウの幅と高さを定義
 WIDTH, HEIGHT = 1100, 650
@@ -16,6 +17,35 @@ DELTA = {
     pg.K_LEFT: (-5, 0),  # 左矢印で左に移動
     pg.K_RIGHT: (5, 0)   # 右矢印で右に移動
 }
+
+def game_over_screen(screen: pg.Surface, kk_img: pg.Surface):
+    """
+    ゲームオーバー画面を表示する関数。
+    Args:
+        screen (pg.Surface): ゲーム画面
+        kk_img (pg.Surface): 泣いているこうかとんの画像
+    """
+    # 画面をブラックアウト
+    screen.fill((0, 0, 0))
+    
+    # 半透明の黒いオーバーレイを描画
+    overlay = pg.Surface((WIDTH, HEIGHT))
+    overlay.set_alpha(128)  # 半透明度の設定
+    screen.blit(overlay, (0, 0))
+    
+    # "Game Over" テキストを表示
+    font = pg.font.Font(None, 74)
+    text = font.render("Game Over", True, (255, 0, 0))  # 赤色のテキスト
+    text_rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+    screen.blit(text, text_rect)
+
+    # 泣いているこうかとんの画像を表示
+    kk_img = pg.transform.rotozoom(pg.image.load("fig/8.png"), 0, 0.9)
+    screen.blit(kk_img, (WIDTH // 2 - kk_img.get_width() // 2, HEIGHT // 2 + 50))
+
+    # 画面を更新して5秒間停止
+    pg.display.update()
+    time.sleep(5)
 
 def check_bound(obj_rct: pg.Rect) -> tuple[bool, bool]:
     """
@@ -119,6 +149,7 @@ def main():
         # 衝突判定
         if kk_rct.colliderect(bb_rct):
             print("衝突！")  # 衝突した場合のメッセージ
+            game_over_screen(screen, kk_img)
             return  # メイン関数を終了
 
 if __name__ == "__main__":
