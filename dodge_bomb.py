@@ -6,7 +6,13 @@ import pygame as pg
 WIDTH, HEIGHT = 1100, 650
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-
+# 移動量の定義
+DELTA = {
+    pg.K_UP: (0, -5),    # 上矢印で上に移動
+    pg.K_DOWN: (0, 5),   # 下矢印で下に移動
+    pg.K_LEFT: (-5, 0),  # 左矢印で左に移動
+    pg.K_RIGHT: (5, 0)   # 右矢印で右に移動
+}
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))
